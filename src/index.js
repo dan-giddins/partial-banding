@@ -3,11 +3,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import PartialBandingsContainer from './PartialBandingsContainer';
 import * as serviceWorker from './serviceWorker';
 import "@fortawesome/fontawesome-free/js/all";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<PartialBandingsContainer />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
