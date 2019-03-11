@@ -7,7 +7,11 @@ class Banding extends Component {
         <div className="row mx-0 my-2">
           <p>{this.key}</p>
           <div className="col p-0">
-            <button type="button" className="btn btn-danger float-right" onClick={this.props.close.bind(this)}>
+            <button
+              type="button"
+              className="btn btn-danger float-right"
+              onClick={this.props.onDeleteClick}
+            >
               <i className="fas fa-times" />
             </button>
           </div>
@@ -15,39 +19,46 @@ class Banding extends Component {
         <div className="row mx-0 my-2">
           <div className="col p-0">Minimum spine value:</div>
           <div className="col p-0">
-            <input type="number"
+            <input
+              type="number"
               className="form-control"
               min="0"
               step="1"
               pattern="\d+"
-              value={this.props.min} />
+              value={this.props.min}
+              onChange={this.props}
+            />
           </div>
         </div>
         <div className="row mx-0 my-2">
           <div className="col p-0">Banding value:</div>
           <div className="col p-0">
-            <input type="number"
+            <input
+              type="number"
               className="form-control"
               min="0"
               step="1"
               pattern="\d+"
-              value={this.props.value} />
+              value={this.props.value}
+            />
           </div>
         </div>
         <div className="row mx-0 my-2">
           <div className="col p-0">Maximum spine value:</div>
           <div className="col p-0">
-            <input type="number"
+            <input
+              type="number"
               className="form-control maximum"
               min="0"
               step="1"
               pattern="\d+"
-              value={this.props.max} />
+              value={this.props.max}
+            />
           </div>
         </div>
       </div>
     );
-  };
+  }
 }
 
 class BandingList extends Component {
@@ -74,31 +85,29 @@ class BandingList extends Component {
           max: 2
         }
       ]
-    }
+    };
   }
 
-  close(id) {
-    console.log(id)
-    console.log(this.state.bandingList)
-    if (true) {
-      for (var i = 0; i < this.state.bandingList.length; i++) {
-        if (this.state.bandingList[i].id === id) {
-          this.setState({
-            bandingList: this.state.bandingList.splice(i, 1)
-          });
-        }
-      }
-    }
-  }
+  delete = id => {
+    this.setState({
+      bandingList: this.state.bandingList.filter(x => x.id !== id)
+    });
+  };
 
   render() {
-    let bandings = this.state.bandingList.map(x => {
-      return (
-        <Banding key={x.id} id={x.id} min={x.min} value={x.value} max={x.max} close={() => this.close(x.id)} />
-      )
-    })
     return (
-      <div>{bandings}</div>
+      <div>
+        {this.state.bandingList.map(x => (
+          <Banding
+            key={x.id}
+            min={x.min}
+            value={x.value}
+            max={x.max}
+            onDeleteClick={() => this.delete(x.id)}
+            onChange={() =>}
+          />
+        ))}
+      </div>
     );
   }
 }
@@ -131,9 +140,7 @@ class PartialBandings extends Component {
 
 class App extends Component {
   render() {
-    return (
-      <PartialBandings />
-    );
+    return <PartialBandings />;
   }
 }
 
