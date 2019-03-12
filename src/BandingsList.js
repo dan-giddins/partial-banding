@@ -83,11 +83,14 @@ class BandingsList extends Component {
   };
 
   delete = id => {
-    console.log(id);
     this.setState({
       bandingsList: this.state.bandingsList.filter(x => x.id !== id)
     });
   };
+
+  submit = () => {
+    
+  }
 
   render() {
     return (
@@ -111,6 +114,15 @@ class BandingsList extends Component {
           >
             <i className="fas fa-plus" />
           </button>
+          <div className="col p-0">
+            <button
+              type="button"
+              className="btn btn-primary m-2  float-right"
+              onClick={this.submit}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     );

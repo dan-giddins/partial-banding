@@ -18,7 +18,7 @@ class PartialBandingsContainer extends Component {
           <p>Minimum Spine Point: {this.state.min}</p>
           <p>Maximum Spine Point: {this.state.max}</p>
         </div>
-        <BandingsList min={this.state.min} max={this.state.max}/>
+        <BandingsList min={this.state.min} max={this.state.max} gradeid={this.state.gradeid}/>
       </div>
     );
   }
