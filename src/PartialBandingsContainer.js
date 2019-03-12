@@ -6,8 +6,8 @@ class PartialBandingsContainer extends Component {
     super(props);
     this.state = {
       gradeid: 0,
-      min: 0,
-      max: 0
+      min: 1,
+      max: 20
     };
   }
 
@@ -18,7 +18,7 @@ class PartialBandingsContainer extends Component {
           <p>Minimum Spine Point: {this.state.min}</p>
           <p>Maximum Spine Point: {this.state.max}</p>
         </div>
-        <BandingsList />
+        <BandingsList min={this.state.min} max={this.state.max}/>
       </div>
     );
   }

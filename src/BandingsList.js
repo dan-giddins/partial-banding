@@ -8,27 +8,15 @@ class BandingsList extends Component {
       bandingsList: [
         {
           id: 0,
-          min: 0,
-          value: 0,
-          max: 0
-        },
-        {
-          id: 1,
-          min: 1,
-          value: 1,
-          max: 1
-        },
-        {
-          id: 2,
-          min: 2,
-          value: 2,
-          max: 2
+          min: this.props.min,
+          value: Math.round((this.props.min + this.props.max) / 2),
+          max: this.props.max
         }
       ]
     };
   }
 
-  delete = (id) => {
+  delete = id => {
     console.log(id);
     this.setState({
       bandingsList: this.state.bandingsList.filter(x => x.id !== id)
@@ -36,8 +24,53 @@ class BandingsList extends Component {
   };
 
   update = (event, id) => {
-    console.log(event.target.name)
-  }
+    const name = event.target.name;
+    let value = event.target.value;
+    if (value < this.props.min) {
+      value = this.props.min;
+    } else if (value > this.props.max) {
+      value = this.props.max;
+    }
+    switch (name) {
+      case "min":
+        this.setState({
+          bandingsList: this.state.bandingsList.map(x => {
+            if (x.id === id) {
+              x.min = value;
+              return x;
+            } else {
+              return x;
+            }
+          })
+        });
+        break;
+      case "val":
+        this.setState({
+          bandingsList: this.state.bandingsList.map(x => {
+            if (x.id === id) {
+              x.value = value;
+              return x;
+            } else {
+              return x;
+            }
+          })
+        });
+        break;
+      case "max":
+        this.setState({
+          bandingsList: this.state.bandingsList.map(x => {
+            if (x.id === id) {
+              x.max = value;
+              return x;
+            } else {
+              return x;
+            }
+          })
+        });
+        break;
+      default:
+    }
+  };
 
   render() {
     return (
