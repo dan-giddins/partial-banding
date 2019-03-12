@@ -28,11 +28,16 @@ class BandingsList extends Component {
     };
   }
 
-  delete = id => {
+  delete = (id) => {
+    console.log(id);
     this.setState({
       bandingsList: this.state.bandingsList.filter(x => x.id !== id)
     });
   };
+
+  update = (event, id) => {
+    console.log(event.target.name)
+  }
 
   render() {
     return (
@@ -40,13 +45,19 @@ class BandingsList extends Component {
         {this.state.bandingsList.map(x => (
           <Banding
             key={x.id}
+            id={x.id}
             min={x.min}
             value={x.value}
             max={x.max}
-            onDeleteClick={() => this.delete(x.id)}
-            // onChange={() => }
+            onDeleteClick={this.delete}
+            onChange={this.update}
           />
         ))}
+        <div className="row mx-0 my-2">
+          <button type="button" className="btn btn-success m-2">
+            <i className="fas fa-plus" />
+          </button>
+        </div>
       </div>
     );
   }

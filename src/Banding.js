@@ -5,12 +5,11 @@ const Banding = props => {
   return (
     <div className="border-bottom p-2">
       <div className="row mx-0 my-2">
-        <p>{props.key}</p>
         <div className="col p-0">
           <button
             type="button"
             className="btn btn-danger float-right"
-            onClick={props.onDeleteClick}
+            onClick={() => props.onDeleteClick(props.id)}
           >
             <i className="fas fa-times" />
           </button>
@@ -26,7 +25,8 @@ const Banding = props => {
             step="1"
             pattern="\d+"
             value={props.min}
-            onChange={props}
+            name="min"
+            onChange={(event) => props.onChange(event, props.id)}
           />
         </div>
       </div>
@@ -40,6 +40,8 @@ const Banding = props => {
             step="1"
             pattern="\d+"
             value={props.value}
+            name="val"
+            onChange={(event) => props.onChange(event, props.id)}
           />
         </div>
       </div>
@@ -53,6 +55,8 @@ const Banding = props => {
             step="1"
             pattern="\d+"
             value={props.max}
+            name="max"
+            onChange={(event) => props.onChange(event, props.id)}
           />
         </div>
       </div>
@@ -61,11 +65,12 @@ const Banding = props => {
 };
 
 Banding.propTypes = {
-  key: PropTypes.number,
+  id: PropTypes.number,
   min: PropTypes.number,
   value: PropTypes.number,
   max: PropTypes.number,
-  onDeleteClick: PropTypes.func
+  onDeleteClick: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 export default Banding;
