@@ -16,10 +16,20 @@ class BandingsList extends Component {
     };
   }
 
-  delete = id => {
-    console.log(id);
+  create = () => {
+    let id;
+    if (this.state.bandingsList.length > 0) {
+      id = this.state.bandingsList[this.state.bandingsList.length - 1].id + 1;
+    } else {
+      id = 0;
+    }
     this.setState({
-      bandingsList: this.state.bandingsList.filter(x => x.id !== id)
+      bandingsList: this.state.bandingsList.concat({
+        id: id,
+        min: this.props.min,
+        value: Math.round((this.props.min + this.props.max) / 2),
+        max: this.props.max
+      })
     });
   };
 
@@ -72,6 +82,13 @@ class BandingsList extends Component {
     }
   };
 
+  delete = id => {
+    console.log(id);
+    this.setState({
+      bandingsList: this.state.bandingsList.filter(x => x.id !== id)
+    });
+  };
+
   render() {
     return (
       <div>
@@ -87,7 +104,11 @@ class BandingsList extends Component {
           />
         ))}
         <div className="row mx-0 my-2">
-          <button type="button" className="btn btn-success m-2">
+          <button
+            type="button"
+            className="btn btn-success m-2"
+            onClick={this.create}
+          >
             <i className="fas fa-plus" />
           </button>
         </div>
